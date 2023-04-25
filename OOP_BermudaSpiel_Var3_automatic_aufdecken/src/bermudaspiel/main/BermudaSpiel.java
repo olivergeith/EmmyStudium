@@ -12,11 +12,11 @@ public class BermudaSpiel extends Flotte {
 	private static int HOEHE = 7;
 	private final int anzahlSchiffe;
 
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 		new BermudaSpiel(4);
 	}
 
-	public BermudaSpiel(int anzahlSchiffe) {
+	public BermudaSpiel(final int anzahlSchiffe) {
 		super(anzahlSchiffe, BREITE, HOEHE);
 		this.anzahlSchiffe = anzahlSchiffe;
 		final Spielfeld spielfeld = new Spielfeld(BREITE, HOEHE, this /* wir selbst..das Bermadaspiel */);
@@ -36,7 +36,7 @@ public class BermudaSpiel extends Flotte {
 	 * Bermuda Spiel Klasse hat dann alle Methoden die für den Spielverlauf eine
 	 * Rolle spielen, wie z.B die Suche.
 	 */
-	private int getAnzahlHimmelsrichtungen(Koordinate k) {
+	private int getAnzahlHimmelsrichtungen(final Koordinate k) {
 		int anzahlSchiffeN = 0;
 		int anzahlSchiffeO = 0;
 		int anzahlSchiffeS = 0;
@@ -108,7 +108,7 @@ public class BermudaSpiel extends Flotte {
 		return anzahlRichtungen;
 	}
 
-	public char suche(Koordinate k) {
+	public char suche(final Koordinate k) {
 		if (istHierSchiff(k)) {
 			return 'X';
 		}
@@ -124,7 +124,7 @@ public class BermudaSpiel extends Flotte {
 	// Ausprobieren
 
 	@SuppressWarnings("unused")
-	private int getAnzahlSichtbareSchiffe(Koordinate k) {
+	private int getAnzahlSichtbareSchiffe(final Koordinate k) {
 		int anzahlSchiffe = 0;
 		for (final Schiff s : getSchiffe()) {
 			if (s.getX() == k.getX()) {
@@ -141,7 +141,7 @@ public class BermudaSpiel extends Flotte {
 	}
 
 	@SuppressWarnings("unused")
-	private int getAnzahlAngrenzendeSchiffe(Koordinate k) {
+	private int getAnzahlAngrenzendeSchiffe(final Koordinate k) {
 		int anzahlSchiffe = 0;
 		for (int dx = -1; dx <= 1; dx++) {
 			for (int dy = -1; dy <= 1; dy++) {
