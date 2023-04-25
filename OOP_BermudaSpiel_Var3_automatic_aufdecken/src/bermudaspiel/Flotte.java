@@ -1,5 +1,7 @@
 package bermudaspiel;
 
+import bermudaspiel.figuren.Schiff;
+
 public class Flotte {
 	Schiff schiffe[];
 

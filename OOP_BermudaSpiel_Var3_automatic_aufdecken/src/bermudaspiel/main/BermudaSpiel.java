@@ -2,8 +2,8 @@ package bermudaspiel.main;
 
 import bermudaspiel.Flotte;
 import bermudaspiel.Koordinate;
-import bermudaspiel.Schiff;
 import bermudaspiel.Spielfeld;
+import bermudaspiel.figuren.Schiff;
 import bermudaspiel.swing.BermudaFrame;
 import bermudaspiel.swing.BermudaPanel;
 
@@ -13,19 +13,19 @@ public class BermudaSpiel extends Flotte {
 	private final int anzahlSchiffe;
 
 	public static void main(String[] args) {
-
-		final BermudaSpiel bermudaSpiel = new BermudaSpiel(4);
-		final Spielfeld spielfeld = new Spielfeld(BREITE, HOEHE, bermudaSpiel);
-		final BermudaPanel bermudaPanel = new BermudaPanel(BREITE, HOEHE, spielfeld);
-		@SuppressWarnings("unused")
-		final BermudaFrame frame = new BermudaFrame(bermudaPanel);
-
+		new BermudaSpiel(4);
 	}
 
 	public BermudaSpiel(int anzahlSchiffe) {
 		super(anzahlSchiffe, BREITE, HOEHE);
 		this.anzahlSchiffe = anzahlSchiffe;
-
+		final Spielfeld spielfeld = new Spielfeld(BREITE, HOEHE, this /* wir selbst..das Bermadaspiel */);
+		final BermudaPanel bermudaPanel = new BermudaPanel(BREITE, HOEHE, spielfeld);
+		@SuppressWarnings("unused")
+		final BermudaFrame frame = new BermudaFrame(bermudaPanel);
+		// den Fram,e dem Panel bekannt geben, damit das Panel den frame später
+		// schließen kann.
+		bermudaPanel.setFrame(frame);
 	}
 
 	/*

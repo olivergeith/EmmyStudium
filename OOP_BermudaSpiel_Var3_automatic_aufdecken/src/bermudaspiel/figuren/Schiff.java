@@ -1,9 +1,9 @@
-package bermudaspiel;
+package bermudaspiel.figuren;
 
 import java.awt.Color;
 import java.awt.Graphics;
 
-import bermudaspiel.figuren.Figur;
+import bermudaspiel.Koordinate;
 
 public class Schiff extends Koordinate implements Figur {
 

@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import bermudaspiel.Spielfeld;
@@ -12,25 +13,27 @@ import bermudaspiel.figuren.Figur;
 import bermudaspiel.figuren.LeerFigur;
 import bermudaspiel.figuren.MarkierungFigur;
 import bermudaspiel.figuren.ZahlFigur;
+import bermudaspiel.main.BermudaSpiel;
 
 public class BermudaPanel extends JPanel implements MouseListener {
 
 	private static final long serialVersionUID = 1L;
-	final int b;
-	final int h;
-	private Spielfeld spielfeld;
+	final int anzahlBoxenX;
+	final int anzahlBoxenY;
+	private final Spielfeld spielfeld;
+	private BermudaFrame frame;
 
 	public BermudaPanel(int breite, int hoehe, Spielfeld spielfeld) {
-		b = breite;
-		h = hoehe;
+		anzahlBoxenX = breite;
+		anzahlBoxenY = hoehe;
 		this.spielfeld = spielfeld;
 		addMouseListener(this);
 	}
 
 	@Override
 	public void paint(Graphics g) {
-		int boxHeight = getHeight() / h;
-		int boxWidth = getWidth() / b;
+		final int boxHeight = getHeight() / anzahlBoxenY;
+		final int boxWidth = getWidth() / anzahlBoxenX;
 		super.paint(g);
 
 		for (int i = 0; i < getWidth(); i = i + boxWidth) {
@@ -43,9 +46,9 @@ public class BermudaPanel extends JPanel implements MouseListener {
 			g.drawLine(0, i, getWidth(), i);
 		}
 
-		for (int x = 0; x < b; x++) {
-			for (int y = 0; y < h; y++) {
-				Figur figur = spielfeld.get(x, y);
+		for (int x = 0; x < anzahlBoxenX; x++) {
+			for (int y = 0; y < anzahlBoxenY; y++) {
+				final Figur figur = spielfeld.get(x, y);
 				figur.paint(g, x, y, boxWidth, boxHeight);
 			}
 		}
@@ -54,26 +57,32 @@ public class BermudaPanel extends JPanel implements MouseListener {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		int posX = e.getX();
-		int posY = e.getY();
+		final int posX = e.getX();
+		final int posY = e.getY();
 		// Ausrechnen welches Feld geklickt wurde
-		int boxHeight = getHeight() / h;
-		int boxWidth = getWidth() / b;
-		int feldX = posX / boxWidth;
-		int feldY = posY / boxHeight;
+		final int boxHeight = getHeight() / anzahlBoxenY;
+		final int boxWidth = getWidth() / anzahlBoxenX;
+		final int feldX = posX / boxWidth;
+		final int feldY = posY / boxHeight;
 		if (e.getButton() == MouseEvent.BUTTON1) {
 			// linke Maustaste
-			spielfeld.aufdecken(feldX, feldY);
-			Figur figur = spielfeld.get(feldX, feldY);
+			final int aufdecken = spielfeld.aufdecken(feldX, feldY);
+			if (aufdecken >= 0) {
+				repaint();
+				JOptionPane.showMessageDialog(this, "Gewonnen... " + aufdecken + " Felder waren noch offen");
+				// spiel neu starten
+				new BermudaSpiel(4);
+				frame.setVisible(false);
+			}
+
+			final Figur figur = spielfeld.get(feldX, feldY);
+			// wenn zahlfigur Nachbarn markieren
 			if (figur instanceof ZahlFigur && ((ZahlFigur) figur).getSymbol() == '0') {
-				spielfeld.markierenGleicheReihe(feldX, feldY);
-				spielfeld.markierenGleicheSpalte(feldX, feldY);
-				spielfeld.markierenDiagonalenTopLeftBottemRight(feldX, feldY);
-				spielfeld.markierenDiagonalenBottomLeftTopRight(feldX, feldY);
+				spielfeld.markiereNachbarn(feldX, feldY);
 			}
 		} else {
 			// rechte Maustaste
-			Figur figur = spielfeld.get(feldX, feldY);
+			final Figur figur = spielfeld.get(feldX, feldY);
 			if (figur instanceof LeerFigur) {
 				spielfeld.markieren(feldX, feldY);
 			} else if (figur instanceof MarkierungFigur) {
@@ -107,6 +116,10 @@ public class BermudaPanel extends JPanel implements MouseListener {
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
 
+	}
+
+	public void setFrame(BermudaFrame frame) {
+		this.frame = frame;
 	}
 
 }

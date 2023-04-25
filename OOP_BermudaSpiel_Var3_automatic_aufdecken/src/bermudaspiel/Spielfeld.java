@@ -3,6 +3,7 @@ package bermudaspiel;
 import bermudaspiel.figuren.Figur;
 import bermudaspiel.figuren.LeerFigur;
 import bermudaspiel.figuren.MarkierungFigur;
+import bermudaspiel.figuren.Schiff;
 import bermudaspiel.figuren.ZahlFigur;
 import bermudaspiel.main.BermudaSpiel;
 
@@ -36,35 +37,34 @@ public class Spielfeld {
 	}
 
 	public Figur get(int x, int y) {
-		return figuren[x][y];
-	}
-
-	public void aufdecken(int x, int y, boolean automatic) {
-		final char ergebnis = bermudaSpiel.suche(new Koordinate(x, y));
-		final int value = Character.getNumericValue(ergebnis);
-		if (ergebnis == 'X') {
-			set(x, y, bermudaSpiel.getSchiff(new Koordinate(x, y)));
-			java.awt.Toolkit.getDefaultToolkit().beep();
-			// check, ob alle Schiffe aufgedeckt wurden?
-			if (getAnzahlGefundeneSchiffe() == bermudaSpiel.getAnzahlSchiffe()) {
-				// Gewonnen... wir können alles aufdecken
-				final int wievieleLeerfelderNochDaWaren = allesAufdecken();
-				// TODO ausgeben wieviel noch offen war! Je mehr desto besser!
-				java.awt.Toolkit.getDefaultToolkit().beep();
-				java.awt.Toolkit.getDefaultToolkit().beep();
-				java.awt.Toolkit.getDefaultToolkit().beep();
-				java.awt.Toolkit.getDefaultToolkit().beep();
-				java.awt.Toolkit.getDefaultToolkit().beep();
-				// TODO Spiel neu starten!? Oder beenden?
-			}
-
-		} else {
-			set(x, y, new ZahlFigur(value, automatic));
+		if (isValidPosition(x, y)) {
+			return figuren[x][y];
 		}
+		return null;
 	}
 
-	public void aufdecken(int x, int y) {
-		aufdecken(x, y, false);
+	public int aufdecken(int x, int y, boolean automatic) {
+		if (isValidPosition(x, y)) {
+			final char ergebnis = bermudaSpiel.suche(new Koordinate(x, y));
+			final int value = Character.getNumericValue(ergebnis);
+			if (ergebnis == 'X') {
+				set(x, y, bermudaSpiel.getSchiff(new Koordinate(x, y)));
+				java.awt.Toolkit.getDefaultToolkit().beep();
+				// check, ob alle Schiffe aufgedeckt wurden?
+				if (getAnzahlGefundeneSchiffe() == bermudaSpiel.getAnzahlSchiffe()) {
+					// Gewonnen... wir können alles aufdecken
+					return allesAufdecken();
+				}
+
+			} else {
+				set(x, y, new ZahlFigur(value, automatic));
+			}
+		}
+		return -99;
+	}
+
+	public int aufdecken(int x, int y) {
+		return aufdecken(x, y, false);
 	}
 
 	public void markieren(int x, int y) {
@@ -110,6 +110,13 @@ public class Spielfeld {
 		return count;
 	}
 
+	public void markiereNachbarn(int feldX, int feldY) {
+		markierenGleicheReihe(feldX, feldY);
+		markierenGleicheSpalte(feldX, feldY);
+		markierenDiagonalenTopLeftBottemRight(feldX, feldY);
+		markierenDiagonalenBottomLeftTopRight(feldX, feldY);
+	}
+
 	/**
 	 * Einfach die reihe von x=0 bis ende durchgehen und aufdecken, was noch
 	 * Leerfigur ist
@@ -117,7 +124,7 @@ public class Spielfeld {
 	 * @param feldX
 	 * @param feldY
 	 */
-	public void markierenGleicheReihe(int feldX, int feldY) {
+	private void markierenGleicheReihe(int feldX, int feldY) {
 		final int y = feldY;
 		for (int x = 0; x < anzahlBoxesX; x++) {
 			final Figur figur = get(x, feldY);
@@ -128,7 +135,7 @@ public class Spielfeld {
 		}
 	}
 
-	public void markierenGleicheSpalte(int feldX, int feldY) {
+	private void markierenGleicheSpalte(int feldX, int feldY) {
 		final int x = feldX;
 		for (int y = 0; y < anzahlBoxesY; y++) {
 			final Figur figur = get(x, y);
@@ -139,7 +146,7 @@ public class Spielfeld {
 		}
 	}
 
-	public void markierenDiagonalenTopLeftBottemRight(int feldX, int feldY) {
+	private void markierenDiagonalenTopLeftBottemRight(int feldX, int feldY) {
 		int x = feldX + 1;
 		int y = feldY + 1;
 
@@ -165,7 +172,7 @@ public class Spielfeld {
 		}
 	}
 
-	public void markierenDiagonalenBottomLeftTopRight(int feldX, int feldY) {
+	private void markierenDiagonalenBottomLeftTopRight(int feldX, int feldY) {
 		int x = feldX + 1;
 		int y = feldY - 1;
 
