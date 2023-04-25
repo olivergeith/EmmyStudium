@@ -21,7 +21,6 @@ public class BermudaSpiel extends Flotte {
 		this.anzahlSchiffe = anzahlSchiffe;
 		final Spielfeld spielfeld = new Spielfeld(BREITE, HOEHE, this /* wir selbst..das Bermadaspiel */);
 		final BermudaPanel bermudaPanel = new BermudaPanel(BREITE, HOEHE, spielfeld);
-		@SuppressWarnings("unused")
 		final BermudaFrame frame = new BermudaFrame(bermudaPanel);
 		// den Fram,e dem Panel bekannt geben, damit das Panel den frame später
 		// schließen kann.
