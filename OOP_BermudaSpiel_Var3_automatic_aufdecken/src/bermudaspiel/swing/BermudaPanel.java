@@ -23,7 +23,7 @@ public class BermudaPanel extends JPanel implements MouseListener {
 	private final Spielfeld spielfeld;
 	private BermudaFrame frame;
 
-	public BermudaPanel(int breite, int hoehe, Spielfeld spielfeld) {
+	public BermudaPanel(final int breite, final int hoehe, final Spielfeld spielfeld) {
 		anzahlBoxenX = breite;
 		anzahlBoxenY = hoehe;
 		this.spielfeld = spielfeld;
@@ -31,7 +31,7 @@ public class BermudaPanel extends JPanel implements MouseListener {
 	}
 
 	@Override
-	public void paint(Graphics g) {
+	public void paint(final Graphics g) {
 		final int boxHeight = getHeight() / anzahlBoxenY;
 		final int boxWidth = getWidth() / anzahlBoxenX;
 		super.paint(g);
@@ -56,7 +56,12 @@ public class BermudaPanel extends JPanel implements MouseListener {
 	}
 
 	@Override
-	public void mouseClicked(MouseEvent e) {
+	public void mouseClicked(final MouseEvent e) {
+
+	}
+
+	@Override
+	public void mousePressed(final MouseEvent e) {
 		final int posX = e.getX();
 		final int posY = e.getY();
 		// Ausrechnen welches Feld geklickt wurde
@@ -92,33 +97,28 @@ public class BermudaPanel extends JPanel implements MouseListener {
 		}
 
 		repaint();
+
 	}
 
 	@Override
-	public void mousePressed(MouseEvent e) {
+	public void mouseReleased(final MouseEvent e) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void mouseReleased(MouseEvent e) {
+	public void mouseEntered(final MouseEvent e) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void mouseEntered(MouseEvent e) {
+	public void mouseExited(final MouseEvent e) {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	public void setFrame(BermudaFrame frame) {
+	public void setFrame(final BermudaFrame frame) {
 		this.frame = frame;
 	}
 
