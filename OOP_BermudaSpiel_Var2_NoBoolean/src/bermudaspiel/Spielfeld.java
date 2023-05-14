@@ -67,26 +67,18 @@ public class Spielfeld {
 	public void markiereHimmelsrichtungen(int feldX, int feldY) {
 		// vertikal markieren
 		for (int y = 0; y < h; y++) {
-			Figur figur = get(feldX, y);
-			if (figur instanceof LeerFigur) {
-				set(feldX, y, new MarkierungFigur());
-			}
+			replaceLeerFigurMitMarkierungFigur(feldX, y);
 		}
 		// horizontal markieren
 		for (int x = 0; x < b; x++) {
-			Figur figur = get(x, feldY);
-			if (figur instanceof LeerFigur) {
-				set(x, feldY, new MarkierungFigur());
-			}
+			replaceLeerFigurMitMarkierungFigur(x, feldY);
 		}
+
 		// diagonal markieren (S/O)
 		int x = feldX + 1;
 		int y = feldY + 1;
 		while (istImSpielfeld(x, y)) {
-			Figur figur = get(x, y);
-			if (figur instanceof LeerFigur) {
-				set(x, y, new MarkierungFigur());
-			}
+			replaceLeerFigurMitMarkierungFigur(x, y);
 			x++;
 			y++;
 		}
@@ -94,10 +86,7 @@ public class Spielfeld {
 		x = feldX + 1;
 		y = feldY - 1;
 		while (istImSpielfeld(x, y)) {
-			Figur figur = get(x, y);
-			if (figur instanceof LeerFigur) {
-				set(x, y, new MarkierungFigur());
-			}
+			replaceLeerFigurMitMarkierungFigur(x, y);
 			x++;
 			y--;
 		}
@@ -105,10 +94,7 @@ public class Spielfeld {
 		x = feldX - 1;
 		y = feldY - 1;
 		while (istImSpielfeld(x, y)) {
-			Figur figur = get(x, y);
-			if (figur instanceof LeerFigur) {
-				set(x, y, new MarkierungFigur());
-			}
+			replaceLeerFigurMitMarkierungFigur(x, y);
 			x--;
 			y--;
 		}
@@ -116,12 +102,16 @@ public class Spielfeld {
 		x = feldX - 1;
 		y = feldY + 1;
 		while (istImSpielfeld(x, y)) {
-			Figur figur = get(x, y);
-			if (figur instanceof LeerFigur) {
-				set(x, y, new MarkierungFigur());
-			}
+			replaceLeerFigurMitMarkierungFigur(x, y);
 			x--;
 			y++;
+		}
+	}
+
+	private void replaceLeerFigurMitMarkierungFigur(int x, int y) {
+		Figur figur = get(x, y);
+		if (figur instanceof LeerFigur) {
+			set(x, y, new MarkierungFigur());
 		}
 	}
 
