@@ -7,8 +7,6 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
-import bermudaspiel.main.BermudaSpiel;
-
 public class BermudaFrame extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	private BermudaPanel bermudapanel;
@@ -30,9 +28,7 @@ public class BermudaFrame extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		new BermudaSpiel(4);
-		this.setVisible(false);
-		TimerLabel.getInstance().start();
+		bermudapanel.neustart();
 	}
 
 }

@@ -88,9 +88,7 @@ public class BermudaPanel extends JPanel implements MouseListener {
 			if (bermudaSpiel.alleSchiffeGefunden()) {
 				repaint();
 				JOptionPane.showMessageDialog(this, "Gewonnen!");
-				new BermudaSpiel(4);
-				frame.setVisible(false);
-				TimerLabel.getInstance().start();
+				neustart();
 			}
 			// rechte Maustaste
 		} else {
@@ -127,6 +125,12 @@ public class BermudaPanel extends JPanel implements MouseListener {
 	public void setFrame(BermudaFrame frame2) {
 		this.frame = frame2;
 
+	}
+
+	public void neustart() {
+		new BermudaSpiel(4);
+		frame.setVisible(false);
+		TimerLabel.getInstance().start();
 	}
 
 }
