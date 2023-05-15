@@ -31,7 +31,6 @@ public class BermudaPanel extends JPanel implements MouseListener {
 		this.spielfeld = spielfeld;
 		this.bermudaSpiel = bermudaSpiel;
 		this.addMouseListener(this);
-
 	}
 
 	@Override

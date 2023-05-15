@@ -22,7 +22,6 @@ public class BermudaSpiel extends Flotte {
 		BermudaPanel bermudaPanel = new BermudaPanel(BREITE, HOEHE, spielfeld, this);
 		BermudaFrame frame = new BermudaFrame(bermudaPanel);
 		bermudaPanel.setFrame(frame);
-//		timerLabel.start();
 	}
 
 	/*
