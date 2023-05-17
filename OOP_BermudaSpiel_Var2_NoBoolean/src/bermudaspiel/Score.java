@@ -16,4 +16,9 @@ public class Score {
 	public int getSekunden() {
 		return sekunden;
 	}
+
+	@Override
+	public String toString() {
+		return name + "#" + sekunden;
+	}
 }
