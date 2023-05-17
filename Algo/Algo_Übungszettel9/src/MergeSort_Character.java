@@ -1,12 +1,12 @@
 
 import java.util.LinkedList;
 
-public class MergeSort {
+public class MergeSort_Character {
 
 	/* Hilfsfunktion Merge */
-	public static LinkedList<Integer> merge(LinkedList<Integer> liste1, LinkedList<Integer> liste2) {
+	public static LinkedList<Character> merge(LinkedList<Character> liste1, LinkedList<Character> liste2) {
 
-		LinkedList<Integer> result = new LinkedList<Integer>();
+		LinkedList<Character> result = new LinkedList<Character>();
 
 		while (liste1.size() != 0 && liste2.size() != 0) {
 			if (liste1.get(0) < liste2.get(0)) {
@@ -25,28 +25,20 @@ public class MergeSort {
 	}
 
 	/* MergeSort Implementierung inkl. Rekursion */
-	public static LinkedList<Integer> mergeSort(LinkedList<Integer> liste) {
-		LinkedList<Integer> left = new LinkedList<Integer>();
-		LinkedList<Integer> right = new LinkedList<Integer>();
+	public static LinkedList<Character> mergeSort(LinkedList<Character> liste) {
+		LinkedList<Character> left = new LinkedList<Character>();
+		LinkedList<Character> right = new LinkedList<Character>();
 
 		if (liste.size() == 1) {
 			return liste;
 		}
 
 		int half = liste.size() / 2;
-//		for (int i = 0; i < half; i++) {
-//			left.add(liste.get(0));
-//		}
-//
-//		while (!liste.isEmpty()) {
-//			right.add(liste.remove(0));
-//		}
-
 		for (int i = 0; i < half; i++) {
-			left.add(liste.get(i));
+			left.add(liste.remove(0));
 		}
-		for (int i = half; i < liste.size(); i++) {
-			right.add(liste.get(i));
+		while (!liste.isEmpty()) {
+			right.add(liste.remove(0));
 		}
 
 		left = mergeSort(left);
@@ -57,18 +49,18 @@ public class MergeSort {
 
 	/* Main Methode - braucht nicht verändert werden */
 	public static void main(String[] args) {
-		LinkedList<Integer> liste1 = new LinkedList<Integer>();
-		liste1.add(3);
-		liste1.add(6);
-		liste1.add(10);
-		liste1.add(12);
+		LinkedList<Character> liste1 = new LinkedList<Character>();
+		liste1.add('a');
+		liste1.add('c');
+		liste1.add('e');
+		liste1.add('f');
 
-		LinkedList<Integer> liste2 = new LinkedList<Integer>();
-		liste2.add(4);
-		liste2.add(9);
-		liste2.add(12);
-		liste2.add(15);
-		liste2.add(20);
+		LinkedList<Character> liste2 = new LinkedList<Character>();
+		liste2.add('b');
+		liste2.add('c');
+		liste2.add('e');
+		liste2.add('g');
+		liste2.add('j');
 
 		System.out.print("####Testen der Hilfsfunktion Merge####\n");
 		System.out.print("Eingangsliste 1:\n");
@@ -80,16 +72,16 @@ public class MergeSort {
 		System.out.print("Ergebnis von Merge\n");
 		System.out.print(merge(liste1, liste2) + "\n");
 
-		LinkedList<Integer> liste = new LinkedList<Integer>();
-		liste.add(5);
-		liste.add(2);
-		liste.add(9);
-		liste.add(1);
-		liste.add(6);
-		liste.add(3);
-		liste.add(8);
-		liste.add(4);
-		liste.add(7);
+		LinkedList<Character> liste = new LinkedList<Character>();
+		liste.add('d');
+		liste.add('z');
+		liste.add('f');
+		liste.add('p');
+		liste.add('e');
+		liste.add('f');
+		liste.add('s');
+		liste.add('a');
+		liste.add('x');
 
 		System.out.print("\n####Testen der MergeSort Implementierung####\n");
 		System.out.print("Unsortierte Eingangsliste:\n");
@@ -98,7 +90,7 @@ public class MergeSort {
 
 		System.out.print("Ergebnis MergeSort:\n");
 
-		LinkedList<Integer> sortedList = mergeSort(liste);
+		LinkedList<Character> sortedList = mergeSort(liste);
 
 		System.out.print(sortedList);
 
