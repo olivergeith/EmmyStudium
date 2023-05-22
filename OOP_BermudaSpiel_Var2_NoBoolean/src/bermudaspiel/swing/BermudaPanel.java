@@ -8,7 +8,9 @@ import java.awt.event.MouseListener;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import bermudaspiel.Highscore;
 import bermudaspiel.Schiff;
+import bermudaspiel.Score;
 import bermudaspiel.Spielfeld;
 import bermudaspiel.figuren.Figur;
 import bermudaspiel.figuren.LeerFigur;
@@ -88,7 +90,13 @@ public class BermudaPanel extends JPanel implements MouseListener {
 			if (bermudaSpiel.alleSchiffeGefunden()) {
 				repaint();
 				JOptionPane.showMessageDialog(this, "Gewonnen!");
-				neustart();
+				String name = JOptionPane.showInputDialog(this, "Name");
+				Highscore highscore = Highscore.getInstance();
+				highscore.add(new Score(name, TimerLabel.getInstance().stop()));
+				if (name != null) {
+					neustart();
+				}
+
 			}
 			// rechte Maustaste
 		} else {
