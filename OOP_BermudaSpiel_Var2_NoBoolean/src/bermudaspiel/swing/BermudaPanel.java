@@ -94,8 +94,8 @@ public class BermudaPanel extends JPanel implements MouseListener {
 				Highscore highscore = Highscore.getInstance();
 				highscore.add(new Score(name, TimerLabel.getInstance().stop()));
 //				HighDialog dia = new HighDialog(this);
-				dia.setSize(200, 300);
-				dia.setVisible(true);
+//				dia.setSize(200, 300);
+//				dia.setVisible(true);
 				if (name != null) {
 					neustart();
 				}
