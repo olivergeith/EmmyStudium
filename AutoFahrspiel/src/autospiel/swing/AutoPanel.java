@@ -1,5 +1,9 @@
 package autospiel.swing;
 
-public class AutoPanel {
+import javax.swing.JPanel;
+
+public class AutoPanel extends JPanel {
+
+	private static final long serialVersionUID = 1L;
 
 }

@@ -89,6 +89,7 @@ public class BermudaPanel extends JPanel implements MouseListener {
 
 			if (bermudaSpiel.alleSchiffeGefunden()) {
 				repaint();
+				TimerLabel.getInstance().stop();
 				JOptionPane.showMessageDialog(this, "Gewonnen!");
 				String name = JOptionPane.showInputDialog(this, "Name");
 				Highscore highscore = Highscore.getInstance();

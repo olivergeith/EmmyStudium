@@ -30,7 +30,7 @@ public class Schiff extends Koordinate implements Figur {
 
 	@Override
 	public void paint(Graphics g, int xpos, int ypos, int boxBreite, int boxHoehe) {
-		g.setColor(Color.red);
+		g.setColor(Color.pink);
 		g.fillOval(xpos * boxBreite, ypos * boxHoehe, boxBreite, boxHoehe);
 		g.setColor(Color.black);
 		g.drawString("" + getSymbol(), xpos * boxBreite + boxBreite / 2, ypos * boxHoehe + boxHoehe / 2);
