@@ -4,9 +4,11 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
 
 public class HighscoreModel implements TableModel {
-	Highscore highscore = Highscore.getInstance();
-	private String[] columnNames = { "Name", "Sekunden" };
-	private Object[][] data = { { highscore.get(getRowCount()), highscore.get(getColumnCount()) } };
+	private Highscore highscore;
+
+	public HighscoreModel(Highscore highscore) {
+		this.highscore = highscore;
+	}
 
 	@Override
 	public int getRowCount() {
@@ -20,18 +22,33 @@ public class HighscoreModel implements TableModel {
 
 	@Override
 	public String getColumnName(int columnIndex) {
-		// TODO Auto-generated method stub
+		if (columnIndex == 0) {
+			return "Name";
+		} else if (columnIndex == 1) {
+			return "Sekunden";
+		}
 		return null;
 	}
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		return highscore.toString();
+//		return highscore.toString();
+		if (columnIndex == 0) {
+			return highscore.get(rowIndex).getName();
+		} else if (columnIndex == 1) {
+			return highscore.get(rowIndex).getSekunden();
+		}
+		return null;
 	}
 
 	@Override
 	public Class<?> getColumnClass(int columnIndex) {
-		return String.class;
+		if (columnIndex == 0) {
+			return String.class;
+		} else if (columnIndex == 1) {
+			return Integer.class;
+		}
+		return null;
 	}
 
 	//

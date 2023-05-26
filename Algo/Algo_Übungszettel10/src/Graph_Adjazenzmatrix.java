@@ -11,13 +11,13 @@ public class Graph_Adjazenzmatrix {
 	/* Methode zum Kanten hinzufuegen */
 	public void addEdge(int source, int destination) {
 		adjacencyMatrix[source][destination] = 1;
-		adjacencyMatrix[source][destination] = 1;
+		adjacencyMatrix[destination][source] = 1;
 	}
 
 	/* Methode zum Ausgeben des Graphen auf der Konsole */
 	public void printGraph() {
 		/* Hier Code hinzufuegen */
-		for (int i = 0; i < adjacencyMatrix[0].length; i++) {
+		for (int i = 0; i < adjacencyMatrix.length; i++) {
 			for (int j = 0; j < adjacencyMatrix.length; j++) {
 				System.out.print(adjacencyMatrix[i][j] + " ");
 

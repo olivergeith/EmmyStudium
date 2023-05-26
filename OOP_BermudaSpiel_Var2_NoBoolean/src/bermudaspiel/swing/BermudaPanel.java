@@ -8,6 +8,7 @@ import java.awt.event.MouseListener;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import bermudaspiel.HighDialog;
 import bermudaspiel.Highscore;
 import bermudaspiel.Schiff;
 import bermudaspiel.Score;
@@ -26,6 +27,7 @@ public class BermudaPanel extends JPanel implements MouseListener {
 	private final Spielfeld spielfeld;
 	private BermudaSpiel bermudaSpiel;
 	private BermudaFrame frame;
+	private Highscore highscore;
 
 	public BermudaPanel(final int breite, final int hoehe, final Spielfeld spielfeld, BermudaSpiel bermudaSpiel) {
 		b = breite;
@@ -33,6 +35,7 @@ public class BermudaPanel extends JPanel implements MouseListener {
 		this.spielfeld = spielfeld;
 		this.bermudaSpiel = bermudaSpiel;
 		this.addMouseListener(this);
+		this.highscore = Highscore.getInstance();
 	}
 
 	@Override
@@ -91,13 +94,13 @@ public class BermudaPanel extends JPanel implements MouseListener {
 				repaint();
 				TimerLabel.getInstance().stop();
 				JOptionPane.showMessageDialog(this, "Gewonnen!");
+
 				String name = JOptionPane.showInputDialog(this, "Name");
-				Highscore highscore = Highscore.getInstance();
+
 				highscore.add(new Score(name, TimerLabel.getInstance().stop()));
-//				HighDialog dia = new HighDialog(this);
-//				dia.setSize(200, 300);
-//				dia.setVisible(true);
 				if (name != null) {
+					HighDialog highDialog = new HighDialog(new JPanel(), highscore);
+					highDialog.setVisible(true);
 					neustart();
 				}
 
