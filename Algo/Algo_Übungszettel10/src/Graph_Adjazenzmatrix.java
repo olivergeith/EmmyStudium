@@ -1,17 +1,22 @@
 public class Graph_Adjazenzmatrix {
 	int numVertices;
-	private int[][] adjacencyMatrix;
+	private final int[][] adjacencyMatrix;
 
 	/* Klassen Konstruktor */
 	public Graph_Adjazenzmatrix(int numVertices) {
 		this.numVertices = numVertices;
-		this.adjacencyMatrix = new int[numVertices][numVertices];
+		adjacencyMatrix = new int[numVertices][numVertices];
 	}
 
 	/* Methode zum Kanten hinzufuegen */
 	public void addEdge(int source, int destination) {
 		adjacencyMatrix[source][destination] = 1;
 		adjacencyMatrix[destination][source] = 1;
+	}
+
+	/* Methode zum gerichtete Kanten hinzufuegen */
+	public void addDirectedEdge(int source, int destination) {
+		adjacencyMatrix[source][destination] = 1;
 	}
 
 	/* Methode zum Ausgeben des Graphen auf der Konsole */
@@ -28,8 +33,8 @@ public class Graph_Adjazenzmatrix {
 
 	/**** Main Methode - muss nicht veraendert werden ****/
 	public static void main(String[] args) {
-		int numVertices = 5;
-		Graph_Adjazenzmatrix graph = new Graph_Adjazenzmatrix(numVertices);
+		final int numVertices = 5;
+		final Graph_Adjazenzmatrix graph = new Graph_Adjazenzmatrix(numVertices);
 
 		graph.addEdge(0, 1);
 		graph.addEdge(0, 4);
@@ -43,7 +48,10 @@ public class Graph_Adjazenzmatrix {
 	}
 
 	public int[][] getAdjacencyMatrix() {
-		// TODO Auto-generated method stub
 		return adjacencyMatrix;
+	}
+
+	public boolean isVerbunden(int source, int destination) {
+		return adjacencyMatrix[source][destination] == 1;
 	}
 }
