@@ -1,5 +1,5 @@
 public class Graph_Adjazenzmatrix {
-	private int numVertices;
+	int numVertices;
 	private int[][] adjacencyMatrix;
 
 	/* Klassen Konstruktor */
@@ -40,5 +40,10 @@ public class Graph_Adjazenzmatrix {
 		graph.addEdge(3, 4);
 
 		graph.printGraph();
+	}
+
+	public int[][] getAdjacencyMatrix() {
+		// TODO Auto-generated method stub
+		return adjacencyMatrix;
 	}
 }
