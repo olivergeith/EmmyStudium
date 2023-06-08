@@ -32,20 +32,21 @@ public class Graph_Adjazenzmatrix {
 	}
 
 	/**** Main Methode - muss nicht veraendert werden ****/
-	public static void main(String[] args) {
-		final int numVertices = 5;
-		final Graph_Adjazenzmatrix graph = new Graph_Adjazenzmatrix(numVertices);
-
-		graph.addEdge(0, 1);
-		graph.addEdge(0, 4);
-		graph.addEdge(1, 2);
-		graph.addEdge(1, 3);
-		graph.addEdge(1, 4);
-		graph.addEdge(2, 3);
-		graph.addEdge(3, 4);
-
-		graph.printGraph();
-	}
+//	public static void main(String[] args) {
+//		final int numVertices = 5;
+//		final Graph_Adjazenzmatrix graph = new Graph_Adjazenzmatrix(numVertices);
+//
+//		graph.addEdge(0, 1);
+//		graph.addEdge(0, 4);
+//		graph.addEdge(1, 2);
+//		graph.addEdge(1, 3);
+//		graph.addEdge(1, 4);
+//		graph.addEdge(2, 3);
+//		graph.addEdge(3, 4);
+//
+//		graph.printGraph();
+//
+//	}
 
 	public int[][] getAdjacencyMatrix() {
 		return adjacencyMatrix;
@@ -54,4 +55,39 @@ public class Graph_Adjazenzmatrix {
 	public boolean isVerbunden(int source, int destination) {
 		return adjacencyMatrix[source][destination] == 1;
 	}
+
+	/**
+	 * @param graph
+	 * @param startknoten
+	 * @return the distances to all nodes from the startnode.
+	 */
+//	public int[] breitensuche(int startknoten) {
+//		final Queue<Integer> queue = new LinkedList<>();
+//		final int[] predecessor = new int[numVertices];
+//		final boolean besucht[] = new boolean[numVertices];
+//		final int[] distances = new int[numVertices];
+//
+//		besucht[startknoten] = true;
+//		predecessor[startknoten] = -1;
+//		queue.add(startknoten);
+//
+//		while (!queue.isEmpty()) {
+//			final int node = queue.remove();
+////			System.out.println("Removing node " + node);
+//
+//			for (int otherNode = 0; otherNode < numVertices; otherNode++) {
+//				if (isVerbunden(node, otherNode) && besucht[otherNode] == false) {
+//					besucht[otherNode] = true;
+//					predecessor[otherNode] = node;
+//					distances[otherNode] = distances[node] + 1;
+//					queue.add(otherNode);
+////					System.out.println("Visiting node " + otherNode + ", setting its distance to "
+////							+ distances[otherNode] + " and adding it to the queue");
+//
+//				}
+//			}
+//		}
+////		System.out.println("predecessor: " + Arrays.toString(predecessor));
+//		return distances;
+//	}
 }

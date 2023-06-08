@@ -22,7 +22,7 @@ public class KlickPanel extends JPanel implements MouseListener, ActionListener 
 	final int b;
 	final int h;
 	private final Spielfeld spielfeld;
-	int anzahlTreffer = 0;
+	int score = 0;
 	int FishCounter = 0;
 	private KlickFrame frame;
 
@@ -65,12 +65,12 @@ public class KlickPanel extends JPanel implements MouseListener, ActionListener 
 		final int feldY = posY / boxHeight;
 
 		if (spielfeld.get(feldX, feldY) instanceof FischObjekt) {
-			anzahlTreffer--;
+			score--;
 		}
 		if (spielfeld.get(feldX, feldY) instanceof HaiObjekt) {
-			anzahlTreffer++;
+			score++;
 		}
-		frame.setScore(anzahlTreffer);
+		frame.setScore(score);
 
 	}
 
@@ -106,7 +106,7 @@ public class KlickPanel extends JPanel implements MouseListener, ActionListener 
 	public void gameOver() {
 		timer.stop();
 		JOptionPane.showMessageDialog(this,
-				"Spiel vorbei! Du hast\n" + anzahlTreffer + " von " + FishCounter + " Haien geklickt");
+				"Spiel vorbei! Du hast\n" + score + " von " + FishCounter + " Punkten erreicht");
 		frame.setVisible(false);
 		new KlickSpiel();
 	}

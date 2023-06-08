@@ -68,7 +68,8 @@ public class Breitensuchlauf {
 
 		final int startknoten = 0;
 
-		final int[] distances = breitensuche(graph, startknoten);
+//		final int[] distances = breitensuche(graph, startknoten);
+		final int[] distances = graph.breitensuche(startknoten);
 
 		System.out.println("Distances: " + Arrays.toString(distances));
 
