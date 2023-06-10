@@ -3,7 +3,7 @@ package klickspiel.objekte;
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class PlatzhalterObjekt implements Objekt {
+public class WasserObjekt implements Objekt {
 
 	@Override
 	public char getSymbol() {

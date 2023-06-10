@@ -12,7 +12,7 @@ public class Tiefensuchlauf {
 		stack.push(s);
 		reihenfolge.add(s);
 		while (!stack.isEmpty()) {
-			final int o = stack.pop();
+			int o = stack.pop();
 			for (int n = 0; n < anzahlNodes; n++) {
 				if (!besucht[n] && graph.isVerbunden(o, n)) {
 					besucht[n] = true;
@@ -30,17 +30,12 @@ public class Tiefensuchlauf {
 		final Graph_Adjazenzmatrix graph = new Graph_Adjazenzmatrix(numVertices);
 
 		graph.addEdge(0, 1);
-		graph.addEdge(1, 2);
-		graph.addEdge(2, 3);
 		graph.addEdge(0, 4);
-
-//		graph.addEdge(0, 1);
-//		graph.addEdge(0, 4);
-//		graph.addEdge(1, 2);
-//		graph.addEdge(1, 3);
-//		graph.addEdge(1, 4);
-//		graph.addEdge(2, 3);
-//		graph.addEdge(3, 4);
+		graph.addEdge(1, 2);
+		graph.addEdge(1, 3);
+		graph.addEdge(1, 4);
+		graph.addEdge(2, 3);
+		graph.addEdge(3, 4);
 
 		graph.printGraph();
 
@@ -48,7 +43,7 @@ public class Tiefensuchlauf {
 
 		ArrayList<Integer> reihenfolge = depthFirstsSearch(startknoten, graph);
 
-		for (int i = 0; i < numVertices; i++) {
+		for (int i = 0; i < reihenfolge.size(); i++) {
 			System.out.println(reihenfolge.get(i));
 		}
 	}

@@ -39,7 +39,7 @@ public class KlickFrame extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		panel.gameOver();
+		panel.restart();
 	}
 
 }

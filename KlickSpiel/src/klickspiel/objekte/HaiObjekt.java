@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-import javax.imageio.ImageIO;
+import klickspiel.swing.ImageLoader;
 
 public class HaiObjekt implements Objekt {
 
@@ -15,13 +15,14 @@ public class HaiObjekt implements Objekt {
 		return 0;
 	}
 
-	BufferedImage img = ImageIO.read(madcap - england - chyme - zip - shirt11__56018.jpg);
+	ImageLoader load = new ImageLoader();
+	BufferedImage img = load.loadImage("pngtree-great-white-shark-vector-png-image_8925224.png");
 
 	@Override
 	public void paint(Graphics g, int xpos, int ypos, int boxBreite, int boxHoehe) {
 		g.setColor(Color.red);
 		g.fillOval(xpos * boxBreite, ypos * boxHoehe, boxBreite, boxHoehe);
-		g.drawImage(img, xpos, ypos, boxBreite, boxHoehe, null, null);
+		g.drawImage(img, xpos * boxBreite, ypos * boxHoehe, boxBreite, boxHoehe, Color.cyan, null);
 	}
 
 }
