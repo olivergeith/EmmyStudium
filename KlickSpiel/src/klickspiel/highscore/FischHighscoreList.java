@@ -1,4 +1,4 @@
-package bermudaspiel;
+package klickspiel.highscore;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -7,30 +7,32 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Properties;
 
-public class Highscore extends ArrayList<Score> {
-	private static Highscore instance;
+public class FischHighscoreList extends ArrayList<FischScore> {
+	private static final long serialVersionUID = 1L;
+	private static FischHighscoreList instance;
+	private final static String dateiname = "highscoreslist.properties";
 
-	private Highscore() {
+	private FischHighscoreList() {
 		load();
 	}
 
-	public static Highscore getInstance() {
+	public static FischHighscoreList getInstance() {
 		if (instance == null) {
-			instance = new Highscore();
+			instance = new FischHighscoreList();
 		}
 		return instance;
 	}
 
 	public void load() {
 		Properties prop = new Properties();
-		try (FileInputStream fi = new FileInputStream("highscores.properties")) {
+		try (FileInputStream fi = new FileInputStream(dateiname)) {
 			prop.load(fi);
 			clear(); // clears ArrayList
 
 			prop.entrySet().forEach(propEntry -> { // Lambda foreach
 				propEntry.getKey(); // Key ist egal
 				String hashstring = (String) propEntry.getValue();
-				add(new Score(hashstring));
+				add(new FischScore(hashstring));
 			});
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -50,7 +52,7 @@ public class Highscore extends ArrayList<Score> {
 //		for (int i = 0; i < size(); i++) {
 //			prop.put("" + i, get(i).toString());
 //		}
-		try (FileOutputStream fo = new FileOutputStream("highscores.properties")) {
+		try (FileOutputStream fo = new FileOutputStream(dateiname)) {
 			prop.store(fo, "");
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -58,5 +60,4 @@ public class Highscore extends ArrayList<Score> {
 			e.printStackTrace();
 		}
 	}
-
 }

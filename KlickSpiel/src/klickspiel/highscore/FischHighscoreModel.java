@@ -4,9 +4,9 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
 
 public class FischHighscoreModel implements TableModel {
-	private FischHighscore highscore;
+	private FischHighscoreList highscore;
 
-	public FischHighscoreModel(FischHighscore highscore) {
+	public FischHighscoreModel(FischHighscoreList highscore) {
 		this.highscore = highscore;
 	}
 

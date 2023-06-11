@@ -9,7 +9,7 @@ import klickspiel.swing.KlickPanel;
 public class KlickSpiel {
 	private static int BREITE = 12;
 	private static int HOEHE = 12;
-	private static int ANZAHLRUNDEN = 20;
+	private static int ANZAHLRUNDEN = 20 * 5; // *5 weil Fisch 5 Leben hat
 
 	public KlickSpiel(int anzahlRunden) {
 		Spielfeld spielfeld = new Spielfeld(BREITE, HOEHE, this);
@@ -18,7 +18,7 @@ public class KlickSpiel {
 		KlickFrame frame = new KlickFrame(klickpanel);
 		klickpanel.setFrame(frame);
 		KlickSpiel.ANZAHLRUNDEN = anzahlRunden;
-		spielfeld.createRandomFische();
+		spielfeld.createRandomHai();
 	}
 
 	public static void main(String[] args) {

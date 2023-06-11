@@ -12,7 +12,7 @@ import javax.swing.Timer;
 
 import klickspiel.Spielfeld;
 import klickspiel.highscore.FischHighDialog;
-import klickspiel.highscore.FischHighscore;
+import klickspiel.highscore.FischHighscoreList;
 import klickspiel.highscore.FischScore;
 import klickspiel.main.KlickSpiel;
 import klickspiel.objekte.FischObjekt;
@@ -21,14 +21,15 @@ import klickspiel.objekte.Objekt;
 
 public class KlickPanel extends JPanel implements MouseListener, ActionListener {
 	private static final long serialVersionUID = 1L;
-	private Timer timer = new Timer(220, this);
+	private Timer timer = new Timer(200, this);
 	final int b;
 	final int h;
 	private final Spielfeld spielfeld;
 	int myScore = 0;
 	int anzahlRunden;
-	private FischHighscore highscore;
+	private FischHighscoreList highscore;
 	private KlickFrame frame;
+	int roundCounter = 0;
 
 	public KlickPanel(int breite, int hoehe, final Spielfeld spielfeld, int anzahlRunden) {
 		b = breite;
@@ -36,7 +37,7 @@ public class KlickPanel extends JPanel implements MouseListener, ActionListener 
 		this.spielfeld = spielfeld;
 		timer.start();
 		addMouseListener(this);
-		this.highscore = FischHighscore.getInstance();
+		this.highscore = FischHighscoreList.getInstance();
 		this.anzahlRunden = anzahlRunden;
 	}
 
@@ -102,7 +103,8 @@ public class KlickPanel extends JPanel implements MouseListener, ActionListener 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		spielfeld.fillSpielfeld();
-		if (spielfeld.fishCounter == anzahlRunden) {
+		roundCounter++;
+		if (roundCounter == anzahlRunden) {
 			gameOver();
 		}
 		repaint();
@@ -111,12 +113,16 @@ public class KlickPanel extends JPanel implements MouseListener, ActionListener 
 	public void gameOver() {
 		timer.stop();
 		JOptionPane.showMessageDialog(this,
-				"Spiel vorbei! Du hast\n" + myScore + " von " + anzahlRunden + " Punkten erreicht");
+				"Spiel vorbei! Du hast\n" + myScore + " von " + anzahlRunden / 5 + " Punkten erreicht"); /// 5 weil 5*
+																											/// genommene
+																											/// Anzahl
+																											/// Fische
 		frame.setVisible(false);
 
 		String name = JOptionPane.showInputDialog(this, "Name");
 
 		highscore.add(new FischScore(name, myScore));
+		highscore.save();
 		if (name != null) {
 			FischHighDialog highDialog = new FischHighDialog(new JPanel(), highscore);
 			highDialog.setVisible(true);
