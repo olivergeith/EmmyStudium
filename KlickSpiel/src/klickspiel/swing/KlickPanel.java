@@ -21,24 +21,23 @@ import klickspiel.objekte.Objekt;
 
 public class KlickPanel extends JPanel implements MouseListener, ActionListener {
 	private static final long serialVersionUID = 1L;
-	private Timer timer = new Timer(800, this);
+	private Timer timer = new Timer(220, this);
 	final int b;
 	final int h;
 	private final Spielfeld spielfeld;
 	int myScore = 0;
-	int anzahlFische;
-	int FishCounter = 0;
+	int anzahlRunden;
 	private FischHighscore highscore;
 	private KlickFrame frame;
 
-	public KlickPanel(int breite, int hoehe, final Spielfeld spielfeld, int anzahlFische) {
+	public KlickPanel(int breite, int hoehe, final Spielfeld spielfeld, int anzahlRunden) {
 		b = breite;
 		h = hoehe;
 		this.spielfeld = spielfeld;
 		timer.start();
 		addMouseListener(this);
 		this.highscore = FischHighscore.getInstance();
-		this.anzahlFische = anzahlFische;
+		this.anzahlRunden = anzahlRunden;
 	}
 
 	@Override
@@ -76,6 +75,7 @@ public class KlickPanel extends JPanel implements MouseListener, ActionListener 
 		}
 		if (spielfeld.get(feldX, feldY) instanceof HaiObjekt) {
 			myScore++;
+			java.awt.Toolkit.getDefaultToolkit().beep();
 		}
 		frame.setScore(myScore);
 
@@ -101,10 +101,8 @@ public class KlickPanel extends JPanel implements MouseListener, ActionListener 
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		spielfeld.emptySpielfeld();
-		spielfeld.createRandomFische();
-		FishCounter++;
-		if (FishCounter == anzahlFische) {
+		spielfeld.fillSpielfeld();
+		if (spielfeld.fishCounter == anzahlRunden) {
 			gameOver();
 		}
 		repaint();
@@ -113,8 +111,9 @@ public class KlickPanel extends JPanel implements MouseListener, ActionListener 
 	public void gameOver() {
 		timer.stop();
 		JOptionPane.showMessageDialog(this,
-				"Spiel vorbei! Du hast\n" + myScore + " von " + anzahlFische + " Punkten erreicht");
+				"Spiel vorbei! Du hast\n" + myScore + " von " + anzahlRunden + " Punkten erreicht");
 		frame.setVisible(false);
+
 		String name = JOptionPane.showInputDialog(this, "Name");
 
 		highscore.add(new FischScore(name, myScore));
@@ -124,7 +123,7 @@ public class KlickPanel extends JPanel implements MouseListener, ActionListener 
 		}
 		int playAgain = JOptionPane.showConfirmDialog(this, "Nochmal spielen?", "", JOptionPane.YES_NO_OPTION);
 		if (playAgain == JOptionPane.YES_OPTION) {
-			new KlickSpiel(anzahlFische);
+			new KlickSpiel(anzahlRunden);
 		} else {
 			System.exit(0);
 		}
@@ -133,7 +132,7 @@ public class KlickPanel extends JPanel implements MouseListener, ActionListener 
 	public void restart() {
 		timer.stop();
 		frame.setVisible(false);
-		new KlickSpiel(anzahlFische);
+		new KlickSpiel(anzahlRunden);
 	}
 
 	public void setFrame(KlickFrame frame) {

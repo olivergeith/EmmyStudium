@@ -18,6 +18,7 @@ public class KlickFrame extends JFrame implements ActionListener {
 	public KlickFrame(KlickPanel panel) {
 		this.panel = panel;
 		this.setSize(1080, 1080);
+		this.setTitle("Fisch-Spiel");
 
 		this.setLayout(new BorderLayout());
 		this.add(panel, BorderLayout.CENTER);

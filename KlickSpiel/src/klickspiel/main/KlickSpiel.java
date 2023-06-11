@@ -7,20 +7,21 @@ import klickspiel.swing.KlickFrame;
 import klickspiel.swing.KlickPanel;
 
 public class KlickSpiel {
-	private static int BREITE = 20;
-	private static int HOEHE = 20;
-	private static int ANZAHLFISCHE = 20;
+	private static int BREITE = 12;
+	private static int HOEHE = 12;
+	private static int ANZAHLRUNDEN = 20;
 
-	public KlickSpiel(int anzahlFische) {
+	public KlickSpiel(int anzahlRunden) {
 		Spielfeld spielfeld = new Spielfeld(BREITE, HOEHE, this);
-		KlickPanel klickpanel = new KlickPanel(BREITE, HOEHE, spielfeld, ANZAHLFISCHE);
+		KlickPanel klickpanel = new KlickPanel(BREITE, HOEHE, spielfeld, ANZAHLRUNDEN);
 		JOptionPane.showMessageDialog(klickpanel, "Spiel starten? \nVersuche alle Haie zu töten");
 		KlickFrame frame = new KlickFrame(klickpanel);
 		klickpanel.setFrame(frame);
-		KlickSpiel.ANZAHLFISCHE = anzahlFische;
+		KlickSpiel.ANZAHLRUNDEN = anzahlRunden;
+		spielfeld.createRandomFische();
 	}
 
 	public static void main(String[] args) {
-		new KlickSpiel(ANZAHLFISCHE);
+		new KlickSpiel(ANZAHLRUNDEN);
 	}
 }

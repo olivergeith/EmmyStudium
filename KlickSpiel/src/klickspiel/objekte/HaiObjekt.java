@@ -10,13 +10,15 @@ public class HaiObjekt implements Objekt {
 
 	boolean isClicked = false;
 
+	public int lives = 5;
+
 	@Override
 	public char getSymbol() {
 		return 0;
 	}
 
 	ImageLoader load = new ImageLoader();
-	BufferedImage img = load.loadImage("pngtree-great-white-shark-vector-png-image_8925224.png");
+	BufferedImage img = load.loadImage("Hai.png");
 
 	@Override
 	public void paint(Graphics g, int xpos, int ypos, int boxBreite, int boxHoehe) {
