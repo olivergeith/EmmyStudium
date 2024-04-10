@@ -54,6 +54,7 @@ public class Highscore extends ArrayList<Score> {
 		try (FileOutputStream fo = new FileOutputStream(FILENAME)) {
 			prop.store(fo, "");
 		} catch (FileNotFoundException e) {
+
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();

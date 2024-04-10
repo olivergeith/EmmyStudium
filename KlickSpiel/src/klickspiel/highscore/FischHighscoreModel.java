@@ -3,10 +3,12 @@ package klickspiel.highscore;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
 
-public class FischHighscoreModel implements TableModel {
-	private FischHighscoreList highscore;
+import commonclasses.Highscore;
 
-	public FischHighscoreModel(FischHighscoreList highscore) {
+public class FischHighscoreModel implements TableModel {
+	private Highscore highscore;
+
+	public FischHighscoreModel(Highscore highscore) {
 		this.highscore = highscore;
 	}
 
@@ -25,7 +27,7 @@ public class FischHighscoreModel implements TableModel {
 		if (columnIndex == 0) {
 			return "Name";
 		} else if (columnIndex == 1) {
-			return "Sekunden";
+			return "Punkte";
 		}
 		return null;
 	}

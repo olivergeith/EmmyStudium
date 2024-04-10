@@ -10,10 +10,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import commonclasses.Highscore;
+import commonclasses.Score;
 import klickspiel.Spielfeld;
 import klickspiel.highscore.FischHighDialog;
-import klickspiel.highscore.FischHighscoreList;
-import klickspiel.highscore.FischScore;
 import klickspiel.main.KlickSpiel;
 import klickspiel.objekte.FischObjekt;
 import klickspiel.objekte.HaiObjekt;
@@ -21,13 +21,13 @@ import klickspiel.objekte.Objekt;
 
 public class KlickPanel extends JPanel implements MouseListener, ActionListener {
 	private static final long serialVersionUID = 1L;
-	private Timer timer = new Timer(200, this);
+	private Timer timer = new Timer(400, this);
 	final int b;
 	final int h;
 	private final Spielfeld spielfeld;
 	int myScore = 0;
 	int anzahlRunden;
-	private FischHighscoreList highscore;
+	private Highscore highscore;
 	private KlickFrame frame;
 	int roundCounter = 0;
 
@@ -37,7 +37,7 @@ public class KlickPanel extends JPanel implements MouseListener, ActionListener 
 		this.spielfeld = spielfeld;
 		timer.start();
 		addMouseListener(this);
-		this.highscore = FischHighscoreList.getInstance();
+		this.highscore = Highscore.getInstance();
 		this.anzahlRunden = anzahlRunden;
 	}
 
@@ -121,7 +121,7 @@ public class KlickPanel extends JPanel implements MouseListener, ActionListener 
 
 		String name = JOptionPane.showInputDialog(this, "Name");
 
-		highscore.add(new FischScore(name, myScore));
+		highscore.add(new Score(name, myScore));
 		highscore.save();
 		if (name != null) {
 			FischHighDialog highDialog = new FischHighDialog(new JPanel(), highscore);

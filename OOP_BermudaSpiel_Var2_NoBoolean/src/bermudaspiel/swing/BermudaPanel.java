@@ -2,6 +2,8 @@ package bermudaspiel.swing;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -19,7 +21,7 @@ import bermudaspiel.figuren.MarkierungFigur;
 import bermudaspiel.figuren.ZahlFigur;
 import bermudaspiel.main.BermudaSpiel;
 
-public class BermudaPanel extends JPanel implements MouseListener {
+public class BermudaPanel extends JPanel implements MouseListener, ActionListener {
 
 	private static final long serialVersionUID = 1L;
 	final int b;
@@ -147,6 +149,12 @@ public class BermudaPanel extends JPanel implements MouseListener {
 		new BermudaSpiel(4);
 		frame.setVisible(false);
 		TimerLabel.getInstance().start();
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		neustart();
+
 	}
 
 }
